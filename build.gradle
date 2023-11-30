@@ -37,8 +37,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    //todo model mapper library add
-    //todo rsql library add
+    implementation 'cz.jirutka.rsql:rsql-parser:2.1.0'
+    implementation 'org.modelmapper:modelmapper:3.2.0'
 }
 
 dependencyManagement {
