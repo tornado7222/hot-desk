@@ -40,7 +40,7 @@ public class DeskController {
         DeskResponseDto deskResponseDto = deskService.update(id, dto);
         return ResponseEntity.ok(deskResponseDto);
     }
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
         deskService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

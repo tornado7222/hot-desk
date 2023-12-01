@@ -20,7 +20,10 @@ public class DeskDtoMapper extends GenericDtoMapper<Desk, DeskCreateDto, DeskUpd
 
     @Override
     public DeskResponseDto toResponseDto(Desk desk) {
-        return mapper.map(desk, DeskResponseDto.class);
+
+        DeskResponseDto responseDto = mapper.map(desk, DeskResponseDto.class);
+        responseDto.setRoomId(desk.getRoom().getId());
+        return responseDto;
     }
 
     @Override

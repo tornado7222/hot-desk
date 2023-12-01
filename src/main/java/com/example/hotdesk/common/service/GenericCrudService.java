@@ -11,15 +11,13 @@ public abstract class GenericCrudService<ENTITY, ID, CREATE_DTO, UPDATE_DTO, RES
 {
     public RESPONSE_DTO create( CREATE_DTO createDto )
     {
-        ENTITY entity = getMapper().toEntity( createDto );
-        ENTITY saved = getRepository().save( entity );
+        ENTITY saved = save( createDto );
         return getMapper().toResponseDto( saved );
     }
-
     protected abstract GenericDtoMapper<ENTITY, CREATE_DTO, UPDATE_DTO, RESPONSE_DTO> getMapper();
 
     protected abstract GenericSpecificationRepository<ENTITY, ID> getRepository();
-
+    protected abstract ENTITY save(CREATE_DTO entity);
     public Page<RESPONSE_DTO> getAll( Pageable pageable, String predicate )
     {
         Specification<ENTITY> specification = SpecificationBuilder.build( predicate );
