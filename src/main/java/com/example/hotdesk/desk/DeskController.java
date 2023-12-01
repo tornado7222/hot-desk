@@ -18,25 +18,25 @@ public class DeskController {
     private final DeskService deskService;
 
     @PostMapping
-    public ResponseEntity<?> createDesk(@RequestBody DeskCreateDto deskCreateDto) {
+    public ResponseEntity<DeskResponseDto> createDesk(@RequestBody DeskCreateDto deskCreateDto) {
         DeskResponseDto deskResponseDto = deskService.create(deskCreateDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(deskResponseDto);
     }
 
     @GetMapping
-    public ResponseEntity<?> get(Pageable pageable, @RequestParam String predicate) {
+    public ResponseEntity<Page<DeskResponseDto>> get(Pageable pageable, @RequestParam String predicate) {
         Page<DeskResponseDto> all = deskService.getAll(pageable, predicate);
         return ResponseEntity.ok(all);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable("id") Integer id) {
+    public ResponseEntity<DeskResponseDto> getById(@PathVariable("id") Integer id) {
         DeskResponseDto deskResponseDto = deskService.getById(id);
         return ResponseEntity.ok(deskResponseDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") Integer id, @RequestBody DeskUpdateDto dto) {
+    public ResponseEntity<DeskResponseDto> update(@PathVariable("id") Integer id, @RequestBody DeskUpdateDto dto) {
         DeskResponseDto deskResponseDto = deskService.update(id, dto);
         return ResponseEntity.ok(deskResponseDto);
     }
