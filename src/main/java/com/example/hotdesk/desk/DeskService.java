@@ -22,8 +22,18 @@ public class DeskService extends GenericCrudService<Desk, Integer, DeskCreateDto
     protected Desk save(DeskCreateDto createDto) {
         Desk entity = mapper.toEntity(createDto);
         Room room = roomRepository.findById(createDto.getRoomId())
-                .orElseThrow(() -> throwException(createDto.getRoomId()));
+                .orElseThrow(() -> throwEntityNotFoundException(createDto.getRoomId(), Room.class.getSimpleName()));
         entity.setRoom(room);
         return repository.save(entity);
     }
+
+    @Override
+    protected Desk updateEntity(DeskUpdateDto dto, Desk desk) {
+        mapper.update(dto, desk);
+        Room room = roomRepository.findById(dto.getRoomId())
+                .orElseThrow(() -> throwEntityNotFoundException(dto.getRoomId(), Room.class.getSimpleName()));
+        desk.setRoom(room);
+        return repository.save(desk);
+    }
+
 }

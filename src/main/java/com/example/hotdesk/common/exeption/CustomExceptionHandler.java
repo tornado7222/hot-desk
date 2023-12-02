@@ -53,9 +53,10 @@ public class CustomExceptionHandler
     public ResponseEntity<CustomErrorResponse> handleDataIntegrityViolationException( DataIntegrityViolationException e )
     {
         log.error( e.getMessage(), e );
+        String message = e.getCause() == null ? e.getMessage() : e.getCause().getCause().getCause().getMessage();
         return ResponseEntity
                 .status( HttpStatus.CONFLICT )
-                .body( buildErrorResponse( e.getCause().getCause().getCause().getMessage(), HttpStatus.CONFLICT ) );
+                .body( buildErrorResponse( message, HttpStatus.CONFLICT ) );
     }
 
     @ExceptionHandler( MethodArgumentNotValidException.class )

@@ -1,8 +1,10 @@
 package com.example.hotdesk.office.entity;
 
-import com.example.hotdesk.address.entity.Address;
+import com.example.hotdesk.room.entity.Room;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,6 +16,12 @@ public class Office {
     private Integer id;
     @Column(unique = true, nullable = false)
     private String name;
-    @OneToOne(mappedBy = "address")
+    @OneToOne( cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Address address;
+    @OneToMany(mappedBy = "office")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private List<Room> rooms;
 }

@@ -1,6 +1,6 @@
 package com.example.hotdesk.office.dto;
 
-import com.example.hotdesk.address.entity.Address;
+import com.example.hotdesk.office.entity.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
