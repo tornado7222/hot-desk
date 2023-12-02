@@ -19,4 +19,9 @@ public class UserService extends GenericCrudService<User, Integer, UserCreateDto
     protected User save(UserCreateDto createDto) {
         return repository.save(mapper.toEntity(createDto));
     }
+
+    @Override
+    protected User updateEntity(UserUpdateDto userUpdateDto, User user) {
+        return null;
+    }
 }

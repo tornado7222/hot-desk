@@ -2,12 +2,13 @@ package com.example.hotdesk.office.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class OfficeCreateDto {
-    private String name;
-    private AddressDto address;
+public class AddressResponseDto extends AddressDto{
+    private Integer id;
 }

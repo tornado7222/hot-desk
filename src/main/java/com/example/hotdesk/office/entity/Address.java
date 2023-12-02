@@ -1,10 +1,8 @@
-package com.example.hotdesk.address.entity;
+package com.example.hotdesk.office.entity;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,5 +17,9 @@ public class Address {
     private String city;
     private String street;
     private String building;
+    @OneToOne(mappedBy = "address")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private Office office;
 }
 
