@@ -1,6 +1,8 @@
 package com.example.hotdesk.room.dto;
 
 import com.example.hotdesk.room.entity.RoomType;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +12,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class RoomResponseDto {
     private Integer id;
+    @NotBlank
     private String number;
     private RoomType roomType;
+    @NotNull
     private Integer floorNumber;
     private Integer officeId;
 }
