@@ -1,4 +1,4 @@
-package com.example.hotdesk.address.entity;
+package com.example.hotdesk.office.entity;
 
 
 import jakarta.persistence.*;
