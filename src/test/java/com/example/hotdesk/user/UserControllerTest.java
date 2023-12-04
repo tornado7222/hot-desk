@@ -23,6 +23,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.Optional;
+
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -37,6 +38,7 @@ class UserControllerTest {
     static PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>("postgres:16.0")
             .withUsername("postgres")
             .withPassword("postgres");
+
     @Test
     @Order(value = 1)
     void createUser() {
@@ -73,16 +75,17 @@ class UserControllerTest {
     @Test
     @Order(value = 2)
     void getUsers() {
-        ResponseEntity<CustomPageImpl<UserResponseDto>> response = testRestTemplate.exchange("/user?predicate=name==Ali", HttpMethod.GET, HttpEntity.EMPTY, new ParameterizedTypeReference<>() {});
-        Assertions.assertEquals(response.getStatusCode(),HttpStatus.OK);
+        ResponseEntity<CustomPageImpl<UserResponseDto>> response = testRestTemplate.exchange("/user?predicate=name==Ali", HttpMethod.GET, HttpEntity.EMPTY, new ParameterizedTypeReference<>() {
+        });
+        Assertions.assertEquals(response.getStatusCode(), HttpStatus.OK);
 
         PageImpl<UserResponseDto> body = response.getBody();
 
         Assertions.assertNotNull(body);
-        Assertions.assertEquals(body.getNumberOfElements(),1);
+        Assertions.assertEquals(body.getNumberOfElements(), 1);
         UserResponseDto userResponseDto = body.getContent().get(0);
 
-        Assertions.assertEquals(userResponseDto.getName(),"Ali");
+        Assertions.assertEquals(userResponseDto.getName(), "Ali");
 
     }
 
@@ -114,7 +117,7 @@ class UserControllerTest {
         userUpdateDto.setPhoneNumber("98765432");
         userUpdateDto.setRole(Role.WORKER);
 
-        testRestTemplate.put("/user/%s".formatted(user.getId()),userUpdateDto, user.getId());
+        testRestTemplate.put("/user/%s".formatted(user.getId()), userUpdateDto, user.getId());
 
         ResponseEntity<UserResponseDto> response = testRestTemplate
                 .getForEntity("/user/%s".formatted(user.getId()), UserResponseDto.class);
@@ -138,6 +141,5 @@ class UserControllerTest {
                 .getForEntity("/user/%s".formatted(user.getId()), UserResponseDto.class);
 
         Assertions.assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
-
     }
 }

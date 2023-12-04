@@ -22,6 +22,7 @@ public class UserService extends GenericCrudService<User, Integer, UserCreateDto
 
     @Override
     protected User updateEntity(UserUpdateDto userUpdateDto, User user) {
-        return null;
+         mapper.update(userUpdateDto, user);
+         return user;
     }
 }

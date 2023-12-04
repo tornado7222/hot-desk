@@ -19,6 +19,7 @@ public class Office {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<Room> rooms;
+    @Column(nullable = false)
     private String name;
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
